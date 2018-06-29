@@ -1,0 +1,58 @@
+<h1 mat-dialog-title>
+  {{data.title}}</h1>
+<div mat-dialog-content>
+  <div>
+    <label for="author" class="control-label">Author:</label>
+    <span id="author">{{data.author?.givenName}}</span>
+  </div>
+
+  <div>
+    <label for="isbn" class="control-label">ISBN:</label>
+    <span id="isbn">{{data.ISBN}}</span>
+  </div>
+
+  <div>
+    <label for="publisher" class="control-label">Publisher:</label>
+    <span id="publisher">{{data.publisher}}</span>
+  </div>
+
+  <div>
+    <label for="date" class="control-label">Publish Date:</label>
+    <span id="date">{{data.publishingDate}}</span>
+  </div>
+<div> 
+  <label for="chapter" class="control-label">Chapters</label>
+  <table class="table table-bordered table-hover">
+      <thead>
+          <tr>
+              <th>
+                  Chapter Title
+              </th>
+              <th>
+                  Start page
+              </th>
+              <th>
+                  No of pages
+              </th>
+              
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let chapter of data.chapters; let i = index">
+              <td>{{chapter.title}}</td>
+              <td>{{chapter.startPage}}</td>
+              <td>{{chapter.numberOfPages}}</td>
+             
+          </tr>
+          
+
+
+      </tbody>
+  </table>
+</div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button  [routerLink]="['../edit/', data.id]" (click)="onOkClick()">Edit</button>
+  <button mat-button (click)="onOkClick()" cdkFocusInitial>Ok</button>
+</div>

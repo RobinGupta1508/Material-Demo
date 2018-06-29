@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="table-responsive pd_15">
+    <div>
+      <div class="pd_btm_5">
+        <button mat-raised-button color="primary" routerLink="../add">
+          Add New Book
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <div>
+        <mat-form-field>
+          <input matInput placeholder="Search Book By Name" [(ngModel)]="searchText">
+      </mat-form-field>
+    </div>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>
+            Title
+          </th>
+          <th>
+            ISBN
+          </th>
+          <th>
+            Author
+          </th>
+          <th>
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of bookList | filter : 'title' : searchText; let i = index">
+          <td>{{book.title}}</td>
+          <td>{{book.ISBN}}</td>
+          <td>{{book.author?.givenName}}</td>
+          <td>
+            <button mat-raised-button color="primary" [routerLink]="['../edit/', book.id]">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button mat-raised-button color="accent" (click)="openDialog(book)">
+              <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+            <button mat-raised-button color="warn" (click)="deleteBook(i)">
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

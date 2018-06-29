@@ -1,0 +1,186 @@
+<!-- <div class="container">
+  <form [formGroup]="bookForm">
+    <fieldset>
+      <div class="form-group" [ngClass]="{'has-error' : ((bookForm.get('title').touched || formSubmitFlag) && !bookForm.get('title').valid)}">
+        <label for="Title" class="control-label">Book title</label>
+        <input class="form-control" type="text" formControlName="title" id="title">
+        <span class="help-block" *ngIf="((bookForm.get('title').touched || formSubmitFlag) && !bookForm.get('title').valid)">
+          <span *ngIf="bookForm.get('title').errors.required">
+            Please enter book title
+          </span>
+        <span *ngIf="bookForm.get('title').errors.minlength">
+            title must be 3 char long
+          </span>
+        <span *ngIf="bookForm.get('title').errors.maxlength">
+            title must be less than 50 char
+          </span>
+        </span>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error' : ((bookForm.get('ISBN').touched || formSubmitFlag) && !bookForm.get('ISBN').valid)}">
+        <label for="ISBN" class="control-label">ISBN</label>
+        <input class="form-control" type="text" formControlName="ISBN" id="ISBN">
+        <span class="help-block" *ngIf="((bookForm.get('ISBN').touched || formSubmitFlag) && !bookForm.get('ISBN').valid)">
+          <span *ngIf="bookForm.get('ISBN').errors.required">
+            Please enter ISBN 
+          </span>
+        </span>
+      </div>
+      <div class="form-group" [ngClass]="{'has-error' : ((bookForm.get('author').touched || formSubmitFlag) && !bookForm.get('author').valid)}">
+        <label for="isbn" class="control-label">Author</label>
+        <select class="form-control" id="author" name="state" formControlName="author">
+          <option value="" disabled selected>Select a author...</option>
+          <option *ngFor="let author of authorList;" [ngValue]="author">{{author.givenName}}</option>
+        </select>
+        <span class="help-block" *ngIf="((bookForm.get('author').touched || formSubmitFlag) && !bookForm.get('author').valid)">
+          <span *ngIf="bookForm.get('author').errors.authorValid">
+            Please select author 
+          </span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="publisher" class="control-label">Publisher</label>
+        <input class="form-control" type="text" formControlName="publisher" id="publisher">
+      </div>
+      <div class="form-group">
+        <label for="edition" class="control-label">Edition</label>
+        <input class="form-control" type="text" formControlName="edition" id="edition">
+      </div>
+      <div class="form-group">
+        <label for="publishDate" class="control-label">Publishing Date</label>
+        <input  class="form-control" type="date" formControlName="publishingDate" id="publishDate">
+      </div>
+      <div>
+        <label class="control-label">Enter Chapters</label>
+        
+          <button (click)="addChapter()" class="btn btn-info">Add More Chapter</button>
+        
+      </div>
+      <div formArrayName="chapters" *ngFor="let chapter of bookForm.get('chapters').controls; let i = index;">
+        <div [formGroupName]="i">
+          <div class="form-group" [ngClass]="{'has-error' : ((chapter.get('title').touched || formSubmitFlag) && !chapter.get('title').valid)}">
+            <label class="col-md-2 control-label" for="chapterTitle"> Title</label>
+            <div class="form-group">
+              <input type="text" class="form-control" id="chapterTitle" placeholder="enter Chapter Title" formControlName="title">
+              <span class="help-block" *ngIf="((chapter.get('title').touched || formSubmitFlag) && !chapter.get('title').valid)">
+          <span *ngIf="chapter.get('title').errors.required">
+            Please enter chapter title
+          </span>
+              <span *ngIf="chapter.get('title').errors.minlength">
+            title must be 3 char long
+          </span>
+              <span *ngIf="chapter.get('title').errors.maxlength">
+            title must be less than 15 char
+          </span>
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="startPage"> Start Page</label>
+            <div class="form-group">
+              <input type="number" class="form-control" id="startPage" placeholder="enter start page" formControlName="startPage">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="noOfPages"> No of pages</label>
+            <div class="form-group">
+              <input type="number" class="form-control" id="noOfPages" placeholder="enter no of pages" formControlName="numberOfPages">
+            </div>
+          </div>
+        </div>
+      </div>
+       
+      
+      <div>
+        <div class="has-error form-group" *ngIf="formSubmitFlag && bookForm.invalid">
+          <span>
+            Please enter valid details
+          </span>
+        </div>
+        <button class="btn btn-primary" (click)="saveBook()">Save</button>
+        <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      </div> 
+    </fieldset>
+  </form>
+</div> -->
+<div class="container">
+  <strong>Enter Book Details</strong>
+  <hr/>
+  <form [formGroup]="bookForm">
+    <mat-form-field>
+      <input matInput placeholder="Book title" formControlName="title">
+      <mat-error *ngIf="((bookForm.get('title').touched || formSubmitFlag) && !bookForm.get('title').valid && bookForm.get('title').errors.required )">
+        Book title is required
+      </mat-error>
+      <mat-error *ngIf="((bookForm.get('title').touched || formSubmitFlag) && !bookForm.get('title').valid && bookForm.get('title').errors.minlength )">
+        title must be 3 char long
+      </mat-error>
+      <mat-error *ngIf="((bookForm.get('title').touched || formSubmitFlag) && !bookForm.get('title').valid && bookForm.get('title').errors.maxlength )">
+        title must be less than 50 char
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="ISBN" formControlName="ISBN">
+      <mat-error *ngIf="((bookForm.get('ISBN').touched || formSubmitFlag) && !bookForm.get('ISBN').valid && bookForm.get('ISBN').errors.required )">
+        Book ISBN is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Select Author" formControlName="author">
+        <mat-option *ngFor="let author of authorList;" [value]="author">
+          {{ author.givenName }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="((bookForm.get('author').touched || formSubmitFlag) && !bookForm.get('author').valid && bookForm.get('author').errors.authorValid )">
+        Book author is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Publisher" formControlName="publisher">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Edition" formControlName="edition">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker3" placeholder="Publish Date" formControlName="publishingDate">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
+    <div>
+      <label class="control-label">Book Chapters</label>
+      <button (click)="addChapter()" type="button" mat-raised-button color="accent">Add More Chapter</button>
+    </div>
+    <div formArrayName="chapters" *ngFor="let chapter of chapters.controls; let i = index;">
+      <div [formGroupName]="i">
+        <mat-form-field>
+          <input matInput placeholder="Chapter title" formControlName="title">
+          <mat-error *ngIf="((chapter.get('title').touched || formSubmitFlag) && !chapter.get('title').valid && chapter.get('title').errors.required )">
+            Book title is required
+          </mat-error>
+          <mat-error *ngIf="((chapter.get('title').touched || formSubmitFlag) && !chapter.get('title').valid && chapter.get('title').errors.minlength )">
+            title must be 3 char long
+          </mat-error>
+          <mat-error *ngIf="((chapter.get('title').touched || formSubmitFlag) && !chapter.get('title').valid && chapter.get('title').errors.maxlength )">
+            title must be less than 50 char
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="number" placeholder="Start Page" formControlName="startPage">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="number" placeholder="No Of Pages" formControlName="numberOfPages">
+        </mat-form-field>
+      </div>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="saveBook()">
+        Save
+      </button>
+      <button mat-raised-button (click)="cancel()">
+        Cancel
+      </button>
+      <button *ngIf="bookForm.dirty" mat-raised-button color="accent" (click)="bookForm.reset();formSubmitFlag=false;">
+        Reset
+      </button>
+    </div>
+  </form>
+</div>
